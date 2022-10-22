@@ -42,4 +42,4 @@ const switchValue = iswitch(1)
   .default(() => "default value") // returns "yep"
 ```
 
-For more details usage, see the jsdocs
+For more details usage, [see the jsdocs](https://statementjs.netlify.app/)
