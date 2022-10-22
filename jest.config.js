@@ -18,7 +18,7 @@ module.exports = {
   testMatch: [
     "**/*.spec.ts",
   ],
-  testEnvironment: 'jsdom',
+  testEnvironment: 'node',
   verbose: true,
   testEnvironmentOptions: {
     url: "http://localhost:3000/",
