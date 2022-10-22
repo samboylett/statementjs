@@ -1,9 +1,7 @@
-type AbstractClass = new (...args: any) => any;
-
 /**
  * An inline try/catch statement class
  */
-class Try<T> {
+export class Try<T> {
   readonly state: "error" | "success";
   readonly error?: any;
   readonly returnValue?: T;
@@ -31,7 +29,7 @@ class Try<T> {
    * @param {(e: InstanceType<E>) => T} catchFn - Function to return a new value if the try function threw the specified error type, which can itself throw an error to be caught
    * @returns {Try<T>}
    */
-  catch<E extends AbstractClass>(
+  catch<E extends (new (...args: any) => any)>(
     type: E,
     catchFn: (e: InstanceType<E>) => T
   ): Try<T> {
