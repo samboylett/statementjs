@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/statementjs.svg)](https://badge.fury.io/js/statementjs)
+
 # statementjs
 
 A simple library for run javascript statements inline and returning the values. Offers full typescript support.
