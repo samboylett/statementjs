@@ -2,8 +2,8 @@
  * An inline if/else statement class, with optional elseifs.
  */
 export class If<T> {
-  readonly truthy: () => boolean;
-  readonly value: () => T;
+  readonly #truthy: () => boolean;
+  readonly #value: () => T;
 
   /**
    * Create the class
@@ -12,8 +12,8 @@ export class If<T> {
    * @param {() => T} value - Function to return the value if the statement is truthy
    */
   constructor(truthy: () => boolean, value: () => T) {
-    this.truthy = truthy;
-    this.value = value;
+    this.#truthy = truthy;
+    this.#value = value;
   }
 
   /**
@@ -24,7 +24,7 @@ export class If<T> {
    * @returns {If<T>}
    */
   elseIf(truthy: () => boolean, value: () => T): If<T> {
-    if (this.truthy()) {
+    if (this.#truthy()) {
       return this;
     }
 
@@ -38,7 +38,7 @@ export class If<T> {
    * @returns {T}
    */
   else(value: () => T): T {
-    return this.truthy() ? this.value() : value();
+    return this.#truthy() ? this.#value() : value();
   }
 }
 

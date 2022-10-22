@@ -2,7 +2,7 @@
  * An inline switch statement with cases and default
  */
 export class Switch<Compare, Return> {
-  #compare: Compare;
+  readonly #compare: Compare;
   #cases: {
     compareTo: () => Compare;
     valueIf: () => Return;

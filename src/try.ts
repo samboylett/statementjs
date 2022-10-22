@@ -2,9 +2,9 @@
  * An inline try/catch statement class
  */
 export class Try<T> {
-  readonly state: "error" | "success";
-  readonly error?: any;
-  readonly returnValue?: T;
+  readonly #state: "error" | "success";
+  readonly #error?: any;
+  readonly #returnValue?: T;
 
   /**
    * Instantiate the class
@@ -13,12 +13,12 @@ export class Try<T> {
    */
   constructor(tryFn: () => T) {
     try {
-      this.returnValue = tryFn();
+      this.#returnValue = tryFn();
 
-      this.state = "success";
+      this.#state = "success";
     } catch (e) {
-      this.error = e;
-      this.state = "error";
+      this.#error = e;
+      this.#state = "error";
     }
   }
 
@@ -33,8 +33,8 @@ export class Try<T> {
     type: E,
     catchFn: (e: InstanceType<E>) => T
   ): Try<T> {
-    if (this.state === "error" && this.error instanceof type) {
-      return new Try<T>(() => catchFn(this.error));
+    if (this.#state === "error" && this.#error instanceof type) {
+      return new Try<T>(() => catchFn(this.#error));
     }
 
     return this;
@@ -47,8 +47,8 @@ export class Try<T> {
    * @returns {Try<T>}
    */
   catchAll(catchFn: (e: any) => T): Try<T> {
-    if (this.state === "error") {
-      return new Try<T>(() => catchFn(this.error));
+    if (this.#state === "error") {
+      return new Try<T>(() => catchFn(this.#error));
     }
 
     return this;
@@ -66,11 +66,11 @@ export class Try<T> {
       finallyFn();
     }
 
-    if (this.state === "success") {
-      return this.returnValue as T;
+    if (this.#state === "success") {
+      return this.#returnValue as T;
     }
 
-    throw this.error;
+    throw this.#error;
   }
 }
 
